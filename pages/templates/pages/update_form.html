@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Editar página{% endblock %}
+{% block content %}
+{% include 'pages/page_menu.html'%}
+    {% if 'fail_title' in request.GET %}
+        <p style="color:red">
+        Usa un titulo solamente con caracteres alfanumericos
+        </p>
+    {% endif %}
+    {% if request.user.is_staff %}
+        <main role="main">
+          <div class="container">
+            <div class="row mt-3 mb-5">
+              <div class="col-md-9 mx-auto">
+                <div>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                            {{ form.as_p }}
+                        <div class="text-center">
+                          <input type="submit"  class="btn btn-primary btn-block" value="Editar página" />
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        {% else %}
+        <div class="container">
+         <h1 class="alert-heading">
+             Error 404
+         </h1>
+        </div>
+    {% endif %}
+{% endblock %}
